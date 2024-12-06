@@ -1,8 +1,7 @@
-package Stacks;
-
-import java.util.EmptyStackException;
+package Materia.Stacks;
 
 import Materia.Models.Node;
+import java.util.EmptyStackException;
 
 public class Stack {
     private Node top;
@@ -25,7 +24,7 @@ public class Stack {
         if(isEmpty()){
             throw new EmptyStackException();
         }
-         return top.getValue();
+        return top.getValue();
 
     }
 
