@@ -1,21 +1,20 @@
 package Materia.Queues;
 
-
 import java.util.NoSuchElementException;
-
-import Materia.Models.Node;
+import Materia.Models.NodeGeneric;
 
 public class QueueGeneric<T> {
-    private Node<T> front;
-    private Node<T> rear;
+    private NodeGeneric<T> front;
+    private NodeGeneric<T> rear;
 
     public QueueGeneric() {
         this.front = null;
         this.rear = null;
     }
 
+    // Método para encolar nodos
     public void enqueue(T value) {
-        Node<T> newNode = new Node<>(value);
+        NodeGeneric<T> newNode = new NodeGeneric<>(value);
         if (isEmpty()) {
             front = newNode;
             rear = newNode;
@@ -25,28 +24,36 @@ public class QueueGeneric<T> {
         }
     }
 
-    public Node<T> dequeue() {
+    // Método para desencolar nodos
+    public T dequeue() {
         if (isEmpty()) {
             throw new NoSuchElementException("La cola está vacía");
         }
-        Node<T> node = front;
+        T value = front.getValue();
         front = front.getNext();
         if (front == null) {
             rear = null;
         }
-        return node;
+        return value;
     }
 
-    public Node<T> peek() {
+    // Devuelve el primer elemento sin eliminarlo
+    public T peek() {
         if (isEmpty()) {
             throw new NoSuchElementException("La cola está vacía");
         }
-        return front; 
+        return front.getValue();
     }
 
-    public int size() {
+    // Verifica si la cola está vacía
+    public boolean isEmpty() {
+        return front == null;
+    }
+
+    // Obtiene el tamaño de la cola
+    public int getSize() {
         int size = 0;
-        Node<T> current = front;
+        NodeGeneric<T> current = front;
         while (current != null) {
             size++;
             current = current.getNext();
@@ -54,21 +61,12 @@ public class QueueGeneric<T> {
         return size;
     }
 
+    // Imprime los valores de la cola
     public void printQueue() {
-        if (isEmpty()) {
-            System.out.println("La cola está vacía.");
-            return;
-        }
-        Node<T> current = front;
+        NodeGeneric<T> current = front;
         while (current != null) {
-            System.out.print(current.getValue() + " ");
+            System.out.println(current.getValue());
             current = current.getNext();
         }
-        System.out.println();
-    }
-
-    private boolean isEmpty() {
-        return front == null;
     }
 }
-

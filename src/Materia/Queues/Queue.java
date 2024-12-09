@@ -1,51 +1,53 @@
 package Materia.Queues;
 
+import java.util.NoSuchElementException;
 
 import Materia.Models.Node;
-import java.util.NoSuchElementException;
 
 public class Queue {
     private Node front;
     private Node rear;
 
-
-    public Queue(Node front, Node rear) {
-        this.front = front;
-        this.rear = rear;
+    public Queue() {
+        this.front = null;
+        this.rear = null;
     }
 
-
-
-    public void enqueue(int value){
+    // Metodo para encolar nodos
+    public void enqueue(int value) {
         Node newNode = new Node(value);
-        if(isEmpty()){
+        if (isEmpty()) {
             front = newNode;
             rear = newNode;
-        }else{
-            rear.setNext(newNode); 
+        } else {
+            rear.setNext(newNode);
             rear = newNode;
         }
     }
 
-    public Node dequeue(){
-        if(isEmpty()){
-            throw  new NoSuchElementException("La cola esta vacia");
+    // Desencolar
+    public Node dequeue() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("La cola esta vacia");
         }
         Node node = front;
         front = front.getNext();
-        if(front == null){
+        if (front == null) {
             rear = null;
         }
         return node;
-        
-
     }
 
-    public Node peek(){
-        if (isEmpty()){
+    // Devuelve
+    public Node peek() {
+        if (isEmpty()) {
             throw new NoSuchElementException();
         }
         return front;
+    }
+
+    public boolean isEmpty() {
+        return front == null;
     }
 
     public int getSize() {
@@ -59,29 +61,10 @@ public class Queue {
     }
 
     public void printQueue() {
-        if (isEmpty()) {
-            System.out.println("La cola está vacía.");
-            return;
-        }
-        Node current = front;
+        Node current = rear;
         while (current != null) {
-            System.out.print(current.getValue() + " ");
+            System.out.println(current.getValue());
             current = current.getNext();
         }
-        System.out.println();
     }
-
-
-
-    
-    private boolean isEmpty() {
-        return front ==null;
-    }
-
-
-
-
-    
-    
-    
 }
