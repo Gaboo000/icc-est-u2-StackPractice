@@ -8,15 +8,16 @@ public class LinkedList<T> {
     
 
     public void print (){
-        if(head == null){
-            System.out.println("END");
-            return;
-        }
-        NodeGeneric<T> current = head;
-        while(current.getNext() != null){
-            System.out.println(current.getValue()+" --> ");
-            current = current.getNext();
-        }
+        if (head == null) { 
+            System.out.println("END"); 
+            return; 
+        } 
+        NodeGeneric<T> current = head; 
+        while (current != null) { 
+            System.out.print(current.getValue() + " --> "); 
+            current = current.getNext(); 
+        } 
+        System.out.println("END");
     }
     public void AppendToTail(T value){
         if(head == null){
@@ -28,5 +29,21 @@ public class LinkedList<T> {
             }current.setNext(new NodeGeneric<>(value));
         }
         size++;
+
     }
+
+
+    public NodeGeneric<T> getHead() {
+        return head;
+    }
+    public void setHead(NodeGeneric<T> head) {
+        this.head = head;
+    }
+    public int getSize() {
+        return size;
+    }
+    public void setSize(int size) {
+        this.size = size;
+    }
+
 }

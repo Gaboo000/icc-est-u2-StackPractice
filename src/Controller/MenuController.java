@@ -6,61 +6,65 @@ import View.ConsoleView;
 public class MenuController {
     private ContactManager contactManager;
     private ConsoleView consoleView;
+
     public MenuController() {
         this.contactManager = new ContactManager();
         this.consoleView = new ConsoleView();
     }
 
-
-    public void showMenu(){
+    public void showMenu() {
         boolean exit = false;
         while (!exit) {
             consoleView.displayMenu();
             String option = consoleView.getInput("");
             switch (option) {
                 case "1":
-                    addcontact();
-                    
+                    addContact();
                     break;
                 case "2":
                     findContact();
-                    
                     break;
-                case"3":
+                case "3":
                     deleteContact();
                     break;
-                    
-                case"4":
+                case "4":
                     printContact();
                     break;
-                case"5":
+                case "5":
                     exit = true;
-                    consoleView.showMessage("Exiting............");
-
+                    consoleView.showMessage("Saliendo...");
                     break;
                 default:
-                    consoleView.showMessage("Invalid Option");
+                    consoleView.showMessage("Opción inválida");
                     break;
             }
-            
         }
     }
 
-    private void addcontact (){
-        String name = consoleView.getInput("Enter Name");
-        String  phone = consoleView.getInput("Enter Phone");
-        Contact<String,String> contact = new Contact<>(name, phone);
-        
+    private void addContact() {
+        String name = consoleView.getInput("Ingrese Nombre: ");
+        String phone = consoleView.getInput("Ingrese Teléfono: ");
+        Contact<String, String> contact = new Contact<>(name, phone);
+        contactManager.addContact(contact); // Añadir el contacto a la lista
+        consoleView.showMessage("Contacto añadido.");
     }
 
-    private void findContact(){
-
+    private void findContact() {
+        String name = consoleView.getInput("Ingrese Nombre: ");
+        Contact<?, ?> contact = contactManager.findContactByName(name);
+        if (contact != null) {
+            consoleView.showMessage("Contacto encontrado: " + contact);
+        } else {
+            consoleView.showMessage("Contacto no encontrado.");
+        }
     }
-    private void deleteContact(){
 
+    private void deleteContact() {
+        String name = consoleView.getInput("Ingrese Nombre: ");
+        contactManager.deleteContactByName(name);
     }
-    private void printContact(){
 
+    private void printContact() {
+        contactManager.printList();
     }
-    
 }
