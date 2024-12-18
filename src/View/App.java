@@ -2,6 +2,8 @@ package View;
 
 import Models.Pantalla;
 import Controller.MenuController;
+import Ejercicio_01_sign.SignValidator;
+import Ejercicio_02_sorting.StackSorter;
 import Materia.Queues.Queue;
 import Materia.Queues.QueueGeneric;
 import Materia.Stacks.Stack;
@@ -12,8 +14,16 @@ public class App {
         // runStack();
         // runStackGeneric();
         // runQueue();
-        //runQueueGeneric();
-        runContanctManager();
+        // runQueueGeneric();
+        //runContanctManager();
+        //runValidacionSignos(); 
+        System.out.println("Validación de Signos");
+        System.out.println("\n");
+        runValidacionSignos(); 
+        System.out.println(" Ordenar Stack");
+        System.out.println("\n");
+        runEjercicio2();
+         
     }
 
     public static void runStack() {
@@ -93,5 +103,30 @@ public class App {
         cola.printQueue();
     }
 
+    public static void runValidacionSignos() {
+        String[] ejemplos = {"([]){}", "({)}"};
+        for (String ejemplo : ejemplos) {
+            System.out.println("Input: " + ejemplo + " - Output: " + SignValidator.isValid(ejemplo));
+        }
+    }
 
+
+    private static void runEjercicio2() {
+
+        StackGeneric<Integer> stack = new StackGeneric<>();
+
+        stack.push(2);
+        stack.push(4);
+        stack.push(1);
+        stack.push(5);
+
+        System.out.println("Pila antes de ordenar:");
+        stack.printStack();;
+
+        StackSorter.sort(stack);
+
+        System.out.println("Pila después de ordenar:");
+        stack.printStack();;
+        
+    }
 }

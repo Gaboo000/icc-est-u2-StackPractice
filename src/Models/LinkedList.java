@@ -6,7 +6,6 @@ public class LinkedList<T> {
     private NodeGeneric<T> head;  //Referenciia al primer nodo
     private int size = 0; //Controlador del numero de nodo en la 
     
-
     public void print (){
         if (head == null) { 
             System.out.println("END"); 
